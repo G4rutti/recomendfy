@@ -59,4 +59,22 @@ export class OpenAIClient implements ILLMGateway {
 
     return concept;
   }
+
+  async generateCustomPlaylistConcept(keywords: string, profile: MusicProfile): Promise<PlaylistConcept> {
+    console.log('Generating custom playlist concept for keywords:', keywords);
+
+    // Simulated delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    // Mock implementation - in real scenario would use AI
+    return {
+      playlist_name: `${keywords} Mix`,
+      description: `A personalized playlist based on: ${keywords}`,
+      target_energy: [profile.energy_avg - 0.2, profile.energy_avg + 0.2],
+      target_valence: [profile.valence_avg - 0.2, profile.valence_avg + 0.2],
+      preferred_genres: profile.top_genres || ["pop"],
+      novelty: 0.5,
+      avoid_artists: []
+    };
+  }
 }
