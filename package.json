@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "vercel-build": "tsc",
     "start": "node dist/main.js",
     "dev": "nodemon src/main.ts"
   },

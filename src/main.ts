@@ -31,8 +31,14 @@ if (!process.env.SPOTIFY_CLIENT_ID) {
     console.warn("WARNING: SPOTIFY_CLIENT_ID is not set in .env");
 }
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-  console.log(`1. Login first: http://localhost:${port}/auth/login`);
-  console.log(`2. Then POST to: http://localhost:${port}/playlist/generate`);
-});
+// Only start server if not in Vercel (serverless)
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+    console.log(`1. Login first: http://localhost:${port}/auth/login`);
+    console.log(`2. Then POST to: http://localhost:${port}/playlist/generate`);
+  });
+}
+
+// Export for Vercel serverless
+export default app;
