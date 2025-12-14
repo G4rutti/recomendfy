@@ -8,9 +8,9 @@ export class SpotifyOAuth {
   private static instance: SpotifyOAuth;
   private supabase: SupabaseService;
   
-  private clientId = process.env.SPOTIFY_CLIENT_ID || '';
-  private clientSecret = process.env.SPOTIFY_CLIENT_SECRET || '';
-  private redirectUri = process.env.SPOTIFY_REDIRECT_URI || 'http://localhost:3000/auth/callback';
+  private clientId = (process.env.SPOTIFY_CLIENT_ID || '').trim();
+  private clientSecret = (process.env.SPOTIFY_CLIENT_SECRET || '').trim();
+  private redirectUri = (process.env.SPOTIFY_REDIRECT_URI || 'http://localhost:3000/auth/callback').trim();
 
   private constructor() {
     this.supabase = SupabaseService.getInstance();
