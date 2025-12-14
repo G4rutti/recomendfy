@@ -66,18 +66,13 @@ export class PlaylistController {
       });
 
       // Redirect to Frontend with token and user data
-      const userPayload = encodeURIComponent(JSON.stringify({
-        id: user.id,
-        spotifyId: user.spotify_id,
-        displayName: user.display_name,
-        email: user.email,
-        profileImage: user.profile_image
-      }));
-      
-      res.redirect(`http://localhost:3001/auth/callback?token=${token}&user=${userPayload}`);
+      const userPayload = encodeURIComponent(JSON.stringify(user));
+      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3001';
+      res.redirect(`${frontendUrl}/auth/callback?token=${token}&user=${userPayload}`);
     } catch (error) {
       console.error(error);
-      res.redirect('http://localhost:3001/auth/callback?error=auth_failed');
+      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3001';
+      res.redirect(`${frontendUrl}/auth/callback?error=auth_failed`);
     }
   };
 
